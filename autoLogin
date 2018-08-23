@@ -1,0 +1,11 @@
+on run {input, parameters}
+	
+	(* Your script goes here *)
+	tell application "Safari"
+		do JavaScript " 
+		  document.getElementsByName('uname')[0].value ='USERID';" in document 1
+		do JavaScript "
+		  document.getElementsByName('pwd')[0].value = 'PASSWORD';" in document 1	
+	end tell
+	return input
+end run
