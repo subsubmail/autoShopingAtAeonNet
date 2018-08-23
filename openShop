@@ -1,0 +1,6 @@
+on run {input, parameters}
+	(* Your script goes here *)
+	open location "https://www.aeonnetshop.com/"
+	delay 5
+	return input
+end run
