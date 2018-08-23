@@ -1,0 +1,59 @@
+on run {input, parameters}
+	
+	(* Your script goes here *)
+	set keys to input
+	repeat with k in keys
+		DUPLICATETAB()
+		delay 10
+		inputByName("keyword", 0, k)
+		delay 5
+		pressSearchButton()
+		delay 10
+		insertCart()
+		delay 10
+	end repeat
+	return input
+end run
+
+to insertCart()
+	tell application "Safari"
+		do JavaScript " 
+			document.getElementsByClassName('btn_cart_one_')[0].click()" in document 1
+	end tell
+end insertCart
+
+
+
+to inputByName(theName, num, theValue)
+	tell application "Safari"
+		do JavaScript " 
+	  document.getElementsByName('" & theName & "')[" & num & "].value ='" & theValue & "';" in document 1
+	end tell
+	
+end inputByName
+
+to pressSearchButton()
+	
+	tell application "Safari"
+		
+		do JavaScript " 
+
+			document.getElementsByName('search')[0].click()" in document 1
+		
+	end tell
+	
+end pressSearchButton
+
+to DUPLICATETAB()
+	# Duplicate Safari Tab next to itself.
+	set js to "
+	var docURL = document.URL;
+	var open_link = window.open('','_blank');
+	open_link.location=docURL;
+	"
+	tell application "Safari"
+		tell front document
+			do JavaScript js
+		end tell
+	end tell
+end DUPLICATETAB
